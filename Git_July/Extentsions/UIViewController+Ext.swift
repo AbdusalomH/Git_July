@@ -19,8 +19,5 @@ extension UIViewController {
             alertVC.modalTransitionStyle = .crossDissolve
             self.present(alertVC, animated: true, completion: nil)
         }
-        
-        
     }
-  
 }

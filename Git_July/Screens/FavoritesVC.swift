@@ -21,6 +21,4 @@ class FavoritesVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
-
 }

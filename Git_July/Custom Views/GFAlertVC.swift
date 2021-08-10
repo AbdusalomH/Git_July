@@ -10,10 +10,10 @@ import UIKit
 
 class GFAlertVC: UIViewController {
     
-    let containverView = UIView()
-    let titleLabel = GFTitleLabel(textAlighment: .center, fontSize: 20)
-    let bodyLabel = GFBodyLabel(textAlighment: .center)
-    let actionButton = GFButton(backgroungColor: .systemPink, title: "Ok")
+    let containverView  = UIView()
+    let titleLabel      = GFTitleLabel(textAlighment: .center, fontSize: 20)
+    let bodyLabel       = GFBodyLabel(textAlighment: .center)
+    let actionButton    = GFButton(backgroungColor: .systemPink, title: "Ok")
     
     var alertTitle: String?
     var message: String?
@@ -23,9 +23,9 @@ class GFAlertVC: UIViewController {
     
     init(title: String, message: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
-        self.alertTitle = title
-        self.message = message
-        self.buttonTitle = buttonTitle
+        self.alertTitle     = title
+        self.message        = message
+        self.buttonTitle    = buttonTitle
         
     }
     

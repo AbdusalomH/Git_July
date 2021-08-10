@@ -39,7 +39,6 @@ class GFTextfield: UITextField {
         
         placeholder                 = "Enter a username"
         
-        
     }
 
 }
