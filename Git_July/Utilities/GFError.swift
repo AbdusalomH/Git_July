@@ -1,12 +1,11 @@
 //
-//  UIHelper.swift
+//  GFError.swift
 //  Git_July
 //
-//  Created by Abdusalom Hojiev on 8/10/21.
+//  Created by Abdusalom Hojiev on 8/12/21.
 //  Copyright © 2021 Abdusalom Hojiev. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct UIHelper {
