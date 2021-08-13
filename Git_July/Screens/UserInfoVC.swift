@@ -12,6 +12,9 @@ class UserInfoVC: UIViewController {
     
     var username: String!
     let headerContainer = UIView()
+    let middleContainer = UIView()
+    let bottonContainer = UIView()
+    let dateLabel       = GFBodyLabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,32 +22,6 @@ class UserInfoVC: UIViewController {
         doneButtonConfigure()
         containerConfigure()
         getUsersInfo(username: username)
-        
-    }
-    
-    func doneButtonConfigure(){
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dimissVC))
-        navigationItem.rightBarButtonItem = doneButton
-    }
-    
-    func containerConfigure(){
-        view.addSubview(headerContainer)
-        
-        headerContainer.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            headerContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            headerContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerContainer.heightAnchor.constraint(equalToConstant: 180)
-        ])
-        
-        
-        
-    }
-    
-    @objc func dimissVC(){
-        dismiss(animated: true)
     }
     
     func getUsersInfo(username: String){
@@ -53,8 +30,12 @@ class UserInfoVC: UIViewController {
             
             switch result{
             case .success(let user):
+                guard let user = user else {return}
                 DispatchQueue.main.async {
-                    self.add(chilvVC: GFUserInforHeaderVC(user: user!), to: self.headerContainer)
+                    self.add(chilvVC: GFUserInforHeaderVC(user: user), to: self.headerContainer)
+                    self.add(chilvVC: GFReportInfoVC(user:user), to: self.middleContainer)
+                    self.add(chilvVC: GFFollowerItemVC(user: user), to: self.bottonContainer)
+                    self.dateLabel.text = "Github since \(user.createdAt.converToDisplayFormat())"
                 }
                 
             case .failure(let error):
@@ -69,5 +50,53 @@ class UserInfoVC: UIViewController {
         chilvVC.view.frame = containerView.bounds
         chilvVC.didMove(toParent: self)
     }
+    
+    func doneButtonConfigure(){
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dimissVC))
+        navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    func containerConfigure(){
+        view.addSubview(headerContainer)
+        view.addSubview(middleContainer)
+        view.addSubview(bottonContainer)
+        view.addSubview(dateLabel)
+            
+        let padding: CGFloat = 12
+        let containerHeight: CGFloat = 140
+        
+        
+        headerContainer.translatesAutoresizingMaskIntoConstraints = false
+        middleContainer.translatesAutoresizingMaskIntoConstraints = false
+        bottonContainer.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            headerContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            headerContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            headerContainer.heightAnchor.constraint(equalToConstant: 180),
+            
+            middleContainer.topAnchor.constraint(equalTo: headerContainer.bottomAnchor, constant: padding),
+            middleContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            middleContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            middleContainer.heightAnchor.constraint(equalToConstant: containerHeight),
+            
+            bottonContainer.topAnchor.constraint(equalTo: middleContainer.bottomAnchor, constant: padding),
+            bottonContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            bottonContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            bottonContainer.heightAnchor.constraint(equalToConstant: containerHeight),
+            
+            dateLabel.topAnchor.constraint(equalTo: bottonContainer.bottomAnchor, constant: padding),
+            dateLabel.centerXAnchor.constraint(equalTo: bottonContainer.centerXAnchor),
+            dateLabel.heightAnchor.constraint(equalToConstant: 18)
+        ])
+   
+    }
+    
+    @objc func dimissVC(){
+        dismiss(animated: true)
+    }
+    
+
 }
 
