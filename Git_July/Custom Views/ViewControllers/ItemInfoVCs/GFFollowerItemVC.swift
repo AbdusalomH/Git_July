@@ -13,6 +13,7 @@ class GFFollowerItemVC: GFItemInfoVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        
     }
     
     
@@ -20,7 +21,12 @@ class GFFollowerItemVC: GFItemInfoVC {
         itemInfoViewOne.setItemInfoType(IteminfoType: .followers, withCount: user.followers)
         ItemInfoViewTwo.setItemInfoType(IteminfoType: .following, withCount: user.following)
         actionButton.set(backgroundColor: .systemGreen, title: "Get followers")
+        
   
     }
-  
+    
+    override func didtapButton() {
+        delegate?.didTapGetFollowerButton()
+    }
+
 }

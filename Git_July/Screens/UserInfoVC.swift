@@ -6,6 +6,11 @@
 //  Copyright © 2021 Abdusalom Hojiev. All rights reserved.
 //
 
+protocol UserInfoDelegate {
+    func didTapGithubProfileButton()
+    func didTapGetFollowerButton()
+}
+
 import UIKit
 
 class UserInfoVC: UIViewController {
@@ -31,17 +36,30 @@ class UserInfoVC: UIViewController {
             switch result{
             case .success(let user):
                 guard let user = user else {return}
-                DispatchQueue.main.async {
-                    self.add(chilvVC: GFUserInforHeaderVC(user: user), to: self.headerContainer)
-                    self.add(chilvVC: GFReportInfoVC(user:user), to: self.middleContainer)
-                    self.add(chilvVC: GFFollowerItemVC(user: user), to: self.bottonContainer)
-                    self.dateLabel.text = "Github since \(user.createdAt.converToDisplayFormat())"
-                }
+                DispatchQueue.main.async { self.configureUIElements(with: user) }
                 
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Otsyuda idem" , message: error.rawValue, actionTitle: "Ok")
             }
         }
+    }
+    
+    func configureUIElements(with user: User) {
+        
+        
+        let reporItemVC         = GFReportInfoVC(user: user)
+        reporItemVC.delegate    = self
+        
+        let followerItemVC      = GFFollowerItemVC(user: user)
+        followerItemVC.delegate = self
+        
+        
+        
+        self.add(chilvVC: GFUserInforHeaderVC(user: user), to: self.headerContainer)
+        self.add(chilvVC: reporItemVC, to: self.middleContainer)
+        self.add(chilvVC: followerItemVC , to: self.bottonContainer)
+        self.dateLabel.text = "Github since \(user.createdAt.converToDisplayFormat())"
+        
     }
     
     func add(chilvVC: UIViewController, to containerView: UIView) {
@@ -96,7 +114,21 @@ class UserInfoVC: UIViewController {
     @objc func dimissVC(){
         dismiss(animated: true)
     }
-    
 
+}
+
+
+extension UserInfoVC: UserInfoDelegate {
+    
+    func didTapGithubProfileButton() {
+        print("Guthub Buttob was prssed")
+    }
+    
+    func didTapGetFollowerButton() {
+        print("Get followers button was pressed")
+        //dismiss screen
+        // go to Get followers screen
+    }
+  
 }
 

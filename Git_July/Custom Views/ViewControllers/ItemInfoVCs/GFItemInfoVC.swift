@@ -15,12 +15,16 @@ class GFItemInfoVC: UIViewController {
     let ItemInfoViewTwo = GFItemInfoView()
     let actionButton = GFButton()
     
+    var delegate:  UserInfoDelegate!
+    
     var user: User!
     
     init(user:User) {
         super.init(nibName: nil, bundle: nil)
         self.user = user
+        
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -31,7 +35,9 @@ class GFItemInfoVC: UIViewController {
         super.viewDidLoad()
         configureBackgroundView()
         layoutUI()
+        configureActiomButton()
         configureStackView()
+        
     }
     
     
@@ -48,6 +54,13 @@ class GFItemInfoVC: UIViewController {
         stackView.addArrangedSubview(ItemInfoViewTwo)
         
     }
+    
+    private func configureActiomButton(){
+        actionButton.addTarget(self, action: #selector(didtapButton), for: .touchUpInside)
+    }
+    
+    @objc func didtapButton() {}
+    
     
     
     private func layoutUI(){
@@ -67,11 +80,6 @@ class GFItemInfoVC: UIViewController {
             actionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             actionButton.heightAnchor.constraint(equalToConstant: 44)
-        
-        ])
+       ])
     }
-    
-
-
-
 }
