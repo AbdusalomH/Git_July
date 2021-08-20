@@ -59,6 +59,7 @@ class FollowerListVC: UIViewController {
         searchController.searchBar.placeholder                   = "Search for a username"
         searchController.obscuresBackgroundDuringPresentation    = false
         navigationItem.searchController                          = searchController
+  
     }
     
     func configureViewController() {
@@ -113,8 +114,8 @@ class FollowerListVC: UIViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let activaArray        = isSearching ? filteredFollowers : followersList
-        let follower           = activaArray[indexPath.item]
+        let didSelectFollower  = isSearching ? filteredFollowers : followersList
+        let follower           = didSelectFollower[indexPath.item]
         
         let userInforVC        = UserInfoVC()
         userInforVC.username   = follower.login
@@ -163,6 +164,8 @@ extension FollowerListVC: FollowerListVCDelegate {
         filteredFollowers.removeAll()
         page = 1
         collectionView.setContentOffset(.zero, animated: true)
+        isSearching = false
+        
         getFollowers(username: user, page: page)
   
     }
