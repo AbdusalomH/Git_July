@@ -6,12 +6,13 @@
 //  Copyright © 2021 Abdusalom Hojiev. All rights reserved.
 //
 
-protocol UserInfoDelegate {
-    func didTapGithubProfileButton()
-    func didTapGetFollowerButton()
+protocol UserInfoDelegate: class {
+    func didTapGithubProfileButton(for user: User)
+    func didTapGetFollowerButton(for user: User)
 }
 
 import UIKit
+
 
 class UserInfoVC: UIViewController {
     
@@ -21,6 +22,8 @@ class UserInfoVC: UIViewController {
     let bottonContainer = UIView()
     let dateLabel       = GFBodyLabel()
 
+    var delegate: FollowerListVCDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -119,16 +122,24 @@ class UserInfoVC: UIViewController {
 
 
 extension UserInfoVC: UserInfoDelegate {
-    
-    func didTapGithubProfileButton() {
-        print("Guthub Buttob was prssed")
+    func didTapGithubProfileButton(for user: User) {
+        guard let url = URL(string: user.htmlUrl) else {
+            presentGFAlertOnMainThread(title: "Ivalid Url", message: "The url attached is invalid", actionTitle: "Ok")
+            return}
+        
+        profileViaSafari(url: url)
+        
     }
     
-    func didTapGetFollowerButton() {
-        print("Get followers button was pressed")
-        //dismiss screen
-        // go to Get followers screen
+    func didTapGetFollowerButton(for user: User) {
+        
+        guard user.followers != 0 else {
+            presentGFAlertOnMainThread(title: "Bad news", message: "Current user doesn't have any follower", actionTitle: "So sad!")
+            return
+        }
+        delegate.didRequestFollowers(for: user.login)
+        dimissVC()
     }
-  
+
 }
 

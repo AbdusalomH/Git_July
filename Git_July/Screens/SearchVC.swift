@@ -30,6 +30,9 @@ class SearchVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        usernameTextfield.text = ""
+    }
     
     func configureLogoImageView() {
         view.addSubview(logoImage)

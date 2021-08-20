@@ -6,6 +6,10 @@
 //  Copyright © 2021 Abdusalom Hojiev. All rights reserved.
 //
 
+protocol FollowerListVCDelegate: class {
+    func didRequestFollowers(for user: String)
+}
+
 import UIKit
 
 class FollowerListVC: UIViewController {
@@ -114,6 +118,7 @@ class FollowerListVC: UIViewController {
         
         let userInforVC        = UserInfoVC()
         userInforVC.username   = follower.login
+        userInforVC.delegate   = self
         let navController      = UINavigationController(rootViewController: userInforVC)
         present(navController, animated: true)
     }
@@ -147,6 +152,19 @@ extension FollowerListVC: UISearchResultsUpdating, UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearching = false
         updateData(followers: followersList)
+    }
+}
+
+extension FollowerListVC: FollowerListVCDelegate {
+    func didRequestFollowers(for user: String) {
+        self.username = user
+        title = user
+        followersList.removeAll()
+        filteredFollowers.removeAll()
+        page = 1
+        collectionView.setContentOffset(.zero, animated: true)
+        getFollowers(username: user, page: page)
+  
     }
 }
 
