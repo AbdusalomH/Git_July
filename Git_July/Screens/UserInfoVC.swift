@@ -57,7 +57,6 @@ class UserInfoVC: UIViewController {
         followerItemVC.delegate = self
         
         
-        
         self.add(chilvVC: GFUserInforHeaderVC(user: user), to: self.headerContainer)
         self.add(chilvVC: reporItemVC, to: self.middleContainer)
         self.add(chilvVC: followerItemVC , to: self.bottonContainer)
@@ -132,7 +131,6 @@ extension UserInfoVC: UserInfoDelegate {
     }
     
     func didTapGetFollowerButton(for user: User) {
-        
         guard user.followers != 0 else {
             presentGFAlertOnMainThread(title: "Bad news", message: "Current user doesn't have any follower", actionTitle: "So sad!")
             return

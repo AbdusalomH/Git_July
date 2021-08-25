@@ -49,7 +49,10 @@ extension UIViewController {
     func profileViaSafari(url: URL) {
         let safariVC = SFSafariViewController(url: url)
         safariVC.preferredControlTintColor = .systemGreen
-        present(safariVC, animated: true)
+        //DispatchQueue.main.async {
+            present(safariVC, animated: true)
+        //}
+        
     }
     
     func stopAnimate(){
@@ -60,10 +63,8 @@ extension UIViewController {
     }
     
     func showEmptyStateView(with message: String, in view: UIView) {
-        
         let emptyStateView = GFEmtyState(message: message)
         emptyStateView.frame = view.bounds
         view.addSubview(emptyStateView)
-        
     }
 }

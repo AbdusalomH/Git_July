@@ -35,6 +35,28 @@ class FollowerListVC: UIViewController {
         configureCollectionView()
         getFollowers(username: username, page: page)
         configureDataSource()
+        getProfile()
+        
+    }
+    
+    
+    func getProfile() {
+        
+        let profilebutton = UIBarButtonItem(title: "Profile", style: .done, target: self, action: #selector(openProfile))
+        
+        navigationItem.rightBarButtonItem = profilebutton
+        
+        
+        
+    }
+    
+    @objc func openProfile() {
+        
+        let userInforVC        = UserInfoVC()
+        userInforVC.username   = username
+        let navController      = UINavigationController(rootViewController: userInforVC)
+        present(navController, animated: true)
+ 
     }
     
     override func viewWillAppear(_ animated: Bool) {
