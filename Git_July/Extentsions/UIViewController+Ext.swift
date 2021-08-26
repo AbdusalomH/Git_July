@@ -66,5 +66,6 @@ extension UIViewController {
         let emptyStateView = GFEmtyState(message: message)
         emptyStateView.frame = view.bounds
         view.addSubview(emptyStateView)
+        navigationItem.searchController?.searchBar.isHidden = true
     }
 }

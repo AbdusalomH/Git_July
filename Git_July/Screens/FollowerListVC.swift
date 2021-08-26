@@ -35,28 +35,38 @@ class FollowerListVC: UIViewController {
         configureCollectionView()
         getFollowers(username: username, page: page)
         configureDataSource()
-        getProfile()
         
     }
     
-    
-    func getProfile() {
-        
-        let profilebutton = UIBarButtonItem(title: "Profile", style: .done, target: self, action: #selector(openProfile))
-        
-        navigationItem.rightBarButtonItem = profilebutton
-        
-        
-        
-    }
-    
-    @objc func openProfile() {
-        
-        let userInforVC        = UserInfoVC()
-        userInforVC.username   = username
-        let navController      = UINavigationController(rootViewController: userInforVC)
-        present(navController, animated: true)
  
+    @objc func addButtonTapped() {
+        showLoadingView()
+        
+        NetworkManager.shared.getUser(for: username) { [weak self] (result) in
+            
+            guard let self = self else {return}
+            
+            self.stopAnimate()
+            
+            switch result{
+                
+            case.success(let user):
+                let favorite = Follower(login: user!.login, avatarUrl: user!.avatarUrl)
+                
+                PersistanceManager.updatewWith(favorite: favorite, actionType: .add) { [weak self] (error) in
+                    guard let self = self else {return}
+                    
+                    guard let error = error else {
+                        self.presentGFAlertOnMainThread(title: "Success", message: "You are successfully added to favorite list", actionTitle: "Ok")
+                        return
+                    }
+                    self.presentGFAlertOnMainThread(title: "Wrong", message: error.rawValue, actionTitle: "Ok")
+                }
+                
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, actionTitle: "Ok")
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +97,9 @@ class FollowerListVC: UIViewController {
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let profilebutton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = profilebutton
     }
     
     func getFollowers(username: String, page: Int){
@@ -138,7 +151,6 @@ class FollowerListVC: UIViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let didSelectFollower  = isSearching ? filteredFollowers : followersList
         let follower           = didSelectFollower[indexPath.item]
-        
         let userInforVC        = UserInfoVC()
         userInforVC.username   = follower.login
         userInforVC.delegate   = self
@@ -187,7 +199,6 @@ extension FollowerListVC: FollowerListVCDelegate {
         page = 1
         collectionView.setContentOffset(.zero, animated: true)
         isSearching = false
-        
         getFollowers(username: user, page: page)
   
     }
