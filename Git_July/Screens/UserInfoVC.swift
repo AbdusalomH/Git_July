@@ -6,7 +6,7 @@
 //  Copyright © 2021 Abdusalom Hojiev. All rights reserved.
 //
 
-protocol UserInfoDelegate: class {
+protocol UserInfoDelegate: AnyObject {
     func didTapGithubProfileButton(for user: User)
     func didTapGetFollowerButton(for user: User)
 }

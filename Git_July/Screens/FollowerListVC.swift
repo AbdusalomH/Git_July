@@ -6,7 +6,7 @@
 //  Copyright © 2021 Abdusalom Hojiev. All rights reserved.
 //
 
-protocol FollowerListVCDelegate: class {
+protocol FollowerListVCDelegate: AnyObject {
     func didRequestFollowers(for user: String)
 }
 

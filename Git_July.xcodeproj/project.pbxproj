@@ -17,6 +17,7 @@
 		285D5CBB26C685EC0026BAFF /* GFFollowerItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5CBA26C685EC0026BAFF /* GFFollowerItemVC.swift */; };
 		285D5CBE26C691960026BAFF /* Dates+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5CBD26C691960026BAFF /* Dates+Ext.swift */; };
 		285D5CC026C691C90026BAFF /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5CBF26C691C90026BAFF /* String+Ext.swift */; };
+		28603E4826FB81FA00CF0AB2 /* GFTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28603E4726FB81FA00CF0AB2 /* GFTabBarController.swift */; };
 		28724A0726C4FEE800145425 /* GFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28724A0626C4FEE800145425 /* GFError.swift */; };
 		28724A0926C5078E00145425 /* GFUserInforHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28724A0826C5078E00145425 /* GFUserInforHeaderVC.swift */; };
 		28724A0B26C5084000145425 /* GFSecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28724A0A26C5084000145425 /* GFSecondaryTitleLabel.swift */; };
@@ -53,6 +54,7 @@
 		285D5CBA26C685EC0026BAFF /* GFFollowerItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFollowerItemVC.swift; sourceTree = "<group>"; };
 		285D5CBD26C691960026BAFF /* Dates+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dates+Ext.swift"; sourceTree = "<group>"; };
 		285D5CBF26C691C90026BAFF /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		28603E4726FB81FA00CF0AB2 /* GFTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTabBarController.swift; sourceTree = "<group>"; };
 		28724A0626C4FEE800145425 /* GFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFError.swift; sourceTree = "<group>"; };
 		28724A0826C5078E00145425 /* GFUserInforHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFUserInforHeaderVC.swift; sourceTree = "<group>"; };
 		28724A0A26C5084000145425 /* GFSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFSecondaryTitleLabel.swift; sourceTree = "<group>"; };
@@ -121,6 +123,14 @@
 			path = ItemInfoVCs;
 			sourceTree = "<group>";
 		};
+		28603E4326FB819100CF0AB2 /* TabBars */ = {
+			isa = PBXGroup;
+			children = (
+				28603E4726FB81FA00CF0AB2 /* GFTabBarController.swift */,
+			);
+			path = TabBars;
+			sourceTree = "<group>";
+		};
 		28A5B0D626A690CC00068892 = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +165,7 @@
 		28D9922C26C12610000BEAE5 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				28603E4326FB819100CF0AB2 /* TabBars */,
 				28ED96BE26C40F250013E2E9 /* ImageViews */,
 				28ED96BD26C40F1B0013E2E9 /* ViewControllers */,
 				28ED96BC26C40F130013E2E9 /* Labels */,
@@ -295,7 +306,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Abdusalom Hojiev";
 				TargetAttributes = {
 					28A5B0DE26A690CC00068892 = {
@@ -354,6 +365,7 @@
 				285D5CBB26C685EC0026BAFF /* GFFollowerItemVC.swift in Sources */,
 				28C4763826D7D19D0049F646 /* FavoriteCell.swift in Sources */,
 				28D9923526C12D2A000BEAE5 /* User.swift in Sources */,
+				28603E4826FB81FA00CF0AB2 /* GFTabBarController.swift in Sources */,
 				2842130026D7866E00CAC8DA /* PersistanceManager.swift in Sources */,
 				2830190326C284100034421C /* FollowerCell.swift in Sources */,
 				28A5B10326A6DF7600068892 /* GFAlertVC.swift in Sources */,
@@ -412,6 +424,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -436,7 +449,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -472,6 +485,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -490,7 +504,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
