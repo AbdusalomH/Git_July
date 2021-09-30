@@ -14,9 +14,7 @@ class GFReportInfoVC: GFItemInfoVC{
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        
     }
-    
     
     func configure(){
         itemInfoViewOne.setItemInfoType(IteminfoType: .repos, withCount: user.publicRepos)

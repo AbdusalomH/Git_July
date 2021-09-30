@@ -38,7 +38,7 @@ class SearchVC: UIViewController {
         view.addSubview(logoImage)
         
         logoImage.translatesAutoresizingMaskIntoConstraints = false
-        logoImage.image = UIImage(named: "gh-logo")!
+        logoImage.image = Images.ghLogo
         
         NSLayoutConstraint.activate([
             
@@ -62,7 +62,7 @@ class SearchVC: UIViewController {
     }
     
     func dissmisKeyboardFunc() {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tap)
     }
     

@@ -42,7 +42,7 @@ class GFUserInforHeaderVC: UIViewController {
         avatarImageView.dowloadImage(from: user.avatarUrl)
         usenameLabel.text = user.login
         nameLabel.text = user.name ?? "Not available"
-        locationImageView.image = UIImage(systemName: GFSymbols.location)
+        locationImageView.image = UIImage(systemName: Constants.location)
         locationLabel.text = user.location ?? "Not available"
         bioLable.text = user.bio ?? "No data"
         

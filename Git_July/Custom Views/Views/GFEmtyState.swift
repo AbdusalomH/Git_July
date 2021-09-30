@@ -35,7 +35,7 @@ class GFEmtyState: UIView {
         messageLable.numberOfLines = 3
         messageLable.textColor = .secondaryLabel
         
-        logoImage.image = UIImage(named: "empty-state-logo")
+        logoImage.image = Images.emptyState
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

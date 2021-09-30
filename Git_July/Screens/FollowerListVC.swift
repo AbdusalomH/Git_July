@@ -37,8 +37,8 @@ class FollowerListVC: UIViewController {
         configureDataSource()
         
     }
-    
- 
+
+
     @objc func addButtonTapped() {
         showLoadingView()
         
@@ -69,11 +69,13 @@ class FollowerListVC: UIViewController {
         }
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
 
     }
+    
     
     func configureCollectionView(){
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
@@ -83,6 +85,7 @@ class FollowerListVC: UIViewController {
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseID)
 
     }
+    
     
     func configureSearchController() {
         let searchController                                     = UISearchController()
@@ -94,6 +97,7 @@ class FollowerListVC: UIViewController {
   
     }
     
+    
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -101,6 +105,7 @@ class FollowerListVC: UIViewController {
         let profilebutton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = profilebutton
     }
+    
     
     func getFollowers(username: String, page: Int){
         showLoadingView()
@@ -129,6 +134,7 @@ class FollowerListVC: UIViewController {
         }
     }
     
+    
     func configureDataSource() {
         datasource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: collectionView, cellProvider: { (collectionView, indexpath, follower) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.reuseID, for: indexpath) as! FollowerCell
@@ -137,6 +143,7 @@ class FollowerListVC: UIViewController {
             return cell
         })
     }
+    
     
     func updateData(followers: [Follower]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
@@ -147,6 +154,7 @@ class FollowerListVC: UIViewController {
             self.datasource.apply(snapshot, animatingDifferences: true)
         }
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let didSelectFollower  = isSearching ? filteredFollowers : followersList
